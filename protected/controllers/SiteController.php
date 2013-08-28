@@ -29,41 +29,41 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		die();
-	
+
 		
-		$dropbox = Yii::app()->dropbox;
-	
+		$month=Month::model()->findByAttributes(array('month'=>'January'));
 		
-		//First step. Connect to dropbox
-		$request = $dropbox->getRequestToken();
-		Yii::app()->session->add('request', $request); //Save this tokens
-		
-		$link = $dropbox->getAuthorizeLink(); //Show this link to user
-		
-		/**
-		 * This code from callback function
-		 */
-		$dropbox->setToken(Yii::app()->session->get('request')); // Set request tokens
-		$tokens = $dropbox->getAccessToken(); // get Access tokens
-		Yii::app()->session->add('dropbox', $tokens); //save request tokens. It's tokens we can save in db and use
-		
-		/**
-		 * if we get access tokens from database or other storage, we must set tokens by:   *
-		 */
-		$dropbox->setToken($tokens);
-		
-		/**
-		 * Now we can use API methods
-		 */
-		$dropbox->getAccountInfo();
-		
-		var_dump($dropbox);
-		die();
-		
-		$this->render('index');
+		$val=array();
+		foreach($month->users as $user)
+		{ 
+			
+			$values[]= array('name' => $user->name, 'data' => array((int)$user->a,(int) $user->b,(int)$user->c));
+			
+
+      		}
+      		
+      	
+      		
+		$this->render('index',array('value'=>$values));
 	}
 
+	public function actionBar(){
+		
+		$month=Month::model()->findByAttributes(array('id'=>(int)$_REQUEST['month']));
+		
+
+		$val=array();
+		foreach($month->users as $user)
+		{
+				
+			$values[]= array('name' => $user->name, 'data' => array((int)$user->a,(int) $user->b,(int)$user->c));
+				
+		
+		}
+		
+		$this->renderPartial('bar',array('type'=>$_REQUEST['barTyp'],'value'=>$values),false,true);
+	}
+	
 	/**
 	 * This is the action to handle external exceptions.
 	 */

@@ -1,20 +1,38 @@
-<?php
-/* @var $this SiteController */
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+ <form>
 
-$this->pageTitle=Yii::app()->name;
-?>
+<?php echo CHtml::dropDownList('barTyp','',CHtml::listData(Type::model()->findAll(),'type','type'),array('onChange'=>'js:changeValue();'))?>
+<?php echo CHtml::dropDownList('month','', CHtml::listData(Month::model()->findAll(),'id','month'),array('onChange'=>'js:changeValue();'))?>
+</form>
+<script>
+function changeValue(){
+$.ajax({
+	  url: "<?php echo Yii::app()->createAbsoluteUrl('/site/bar')?>",
+	  data:$("form").serialize(),
+	}).done(function(html) {
+	  $('#dataLoadbar').html(html);
+	});
+	
+}
+</script>
 
-<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
 
-<p>Congratulations! You have successfully created your Yii application.</p>
 
-<p>You may change the content of this page by modifying the following two files:</p>
-<ul>
-	<li>View file: <code><?php echo __FILE__; ?></code></li>
-	<li>Layout file: <code><?php echo $this->getLayoutFile('main'); ?></code></li>
-</ul>
+<div id='dataLoadbar'>
 
-<p>For more details on how to further develop this application, please read
-the <a href="http://www.yiiframework.com/doc/">documentation</a>.
-Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
-should you have any questions.</p>
+<?php 
+$this->Widget('ext.highcharts.HighchartsWidget', array(
+   'options'=>array(
+   		'chart'=>array('type'=>'bar'),
+   		
+      'title' => array('text' => 'Consumption'),
+      'xAxis' => array(
+         'categories' => array('A', 'B','C')
+      ),
+      'yAxis' => array(
+         'title' => array('text' => 'Fruit eaten')
+      ),
+      'series' =>$value,
+   )
+));
+?></div>
