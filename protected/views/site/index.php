@@ -6,6 +6,8 @@
 </form>
 <script>
 function changeValue(){
+	$('#dataLoadbar').html('<img src="images/loader.gif" style="width: 40px;margin: 120px 430px;">');
+	
 $.ajax({
 	  url: "<?php echo Yii::app()->createAbsoluteUrl('/site/bar')?>",
 	  data:$("form").serialize(),
