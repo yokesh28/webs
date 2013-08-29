@@ -38,7 +38,7 @@ return array(
 			'dropbox' => array(
 					'class' => 'ext.YiiDropbox.YiiDropbox',
 					'appKey' => '9kclrqwokepw6js',
-					'appSecret' => 'bqdrc0mk2kv4f17',
+					'appSecret' => 'k5a2ecu8ntspgpe',
 					'root' => 'dropbox' //or 'sandbox'
 			),
 			
