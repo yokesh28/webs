@@ -21,6 +21,60 @@ class SiteController extends Controller
 		);
 	}
 
+	public function actionTic(){
+
+		//	$aa=array(array('o','o','x'),array('x','c','x'),array('x','c','x'));
+		//	$aa=array(array('c','c','x'),array('x','o','x'),array('o','x','x'));
+			$aa=array(array('x','o','c'),array('x','x','x'),array('c','o','x'));
+		//  $aa=array(array('c','o','x'),array('o','x','x'),array('x','x','x'));
+
+			
+			
+		for($j=0;$j<sizeof($aa);$j++)
+		{
+			$tempH=null;
+			
+			
+			for($i=0;$i<sizeof($aa[$j])-1;$i++)
+			{
+
+
+
+				if($tempH==$aa[$j][$i] && $aa[$j][$i+1]=='x' && ($aa[$j][$i]=='c'||$aa[$j][$i]=='o'))
+				{
+					$aa[$j][$i+1]='c';
+					break 2;
+				}
+
+
+
+				if($aa[$j][$i+1]=='x' && $aa[$j][$i]=='x')
+				{
+					if(!empty($aa[$j][$i+2]) &&$aa[$j][$i+2]=='x')
+						$aa[$j][$i+1]='c';
+					else
+						$aa[$j][$i]='c';
+					
+					break 2;
+				}
+
+
+
+					
+
+
+				$tempH=$aa[$j][$i];
+			}
+				
+				
+				
+		}
+
+		var_dump($aa);
+		$this->render('tic');
+
+	}
+
 	/**
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
@@ -66,16 +120,15 @@ class SiteController extends Controller
 
 	public function actionDropbox(){
 
-	
+
 
 		$dropbox = Yii::app()->dropbox;
 
 		//First step. Connect to dropbox
 		$request = $dropbox->getRequestToken();
 		Yii::app()->session->add('request', $request); //Save this tokens
-		$link = $dropbox->getAuthorizeLink(); //Show this link to user
+		$link = $dropbox->getAuthorizeLink('http://localhost/webs/index.php?r=site/dropbox'); //Show this link to user
 
-		
 		/**
 		 * This code from callback function
 		 */
@@ -94,6 +147,10 @@ class SiteController extends Controller
 		$dropbox->getAccountInfo();
 		$dropbox->getFile('path/to/file');
 		$dropbox->putFile('path/to/file', 'path/to/file/on/server');
+
+
+
+
 
 		$this->render('dropbox');
 	}
