@@ -66,6 +66,7 @@ class SiteController extends Controller
 
 	public function actionDropbox(){
 
+		Yii::import('application.extensions.oauth2.src.OAuth2.*');
 
 		$dropbox = Yii::app()->dropbox;
 
