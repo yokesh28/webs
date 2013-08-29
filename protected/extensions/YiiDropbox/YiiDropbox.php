@@ -7,7 +7,8 @@
  */
 //Yii::import('application.extensions.oauth2.src.OAuth2.Autoloader');
 
-include 'protected/extensions/oauth2/src/OAuth2/Autoloader.php';
+require_once 'protected/extensions/oauth2/src/OAuth2/Autoloader.php';
+OAuth2\Autoloader::register();
 
 class YiiDropbox extends CApplicationComponent {
 
