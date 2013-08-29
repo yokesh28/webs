@@ -6,6 +6,9 @@
  * @author Joe Constant <http://joeconstant.me/>
  */
 Yii::import('application.extensions.oauth2.src.OAuth2.Autoloader');
+
+require 'protected/extensions/oauth2/src/OAuth2/Autoloader.php';
+
 class YiiDropbox extends CApplicationComponent {
 
     public $appKey;
