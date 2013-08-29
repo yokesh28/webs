@@ -6,8 +6,8 @@
  * @author Joe Constant <http://joeconstant.me/>
  */
 //Yii::import('application.extensions.oauth2.src.OAuth2.Autoloader');
-include_once "protected/extensions/oauth-php/library/OAuthStore.php";
-include_once "protected/extensions/oauth-php/library/OAuthRequester.php";
+require_once "protected/extensions/oauth-php/library/OAuthStore.php";
+require_once "protected/extensions/oauth-php/library/OAuthRequester.php";
 
 //require_once 'protected/extensions/oauth2/src/OAuth2/Autoloader.php';
 //OAuth2\Autoloader::register();
