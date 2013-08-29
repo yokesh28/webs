@@ -6,7 +6,8 @@
 </form>
 <img src="images/loader.gif" style="width: 40px;margin: 120px 430px;display:none" id="preloader" >
 <script>
-function changeValue(){
+function changeValue()
+{
 	$('#preloader').show();
 	
 $.ajax({
